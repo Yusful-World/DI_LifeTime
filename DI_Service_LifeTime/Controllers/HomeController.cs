@@ -13,16 +13,15 @@ namespace DI_Service_LifeTime.Controllers
 
         private readonly IScopedGuidService _scoped1;
         private readonly IScopedGuidService _scoped2;
+        private readonly IScopedGuidService _scoped3;
 
         private readonly ITransientGuidService _transient1;
         private readonly ITransientGuidService _transient2;
+        private readonly ITransientGuidService _transient3;
         
-        private readonly ILogger<HomeController> _logger;
-
         public HomeController(ILogger<HomeController> logger, ISingletonGuidService singleton1, ISingletonGuidService singleton2, 
             IScopedGuidService scoped1, IScopedGuidService scoped2, ITransientGuidService transient1, ITransientGuidService transient2)
         {
-            _logger = logger;
             _singleton1 = singleton1;
             _singleton2 = singleton2;
             _scoped1 = scoped1;
@@ -35,11 +34,13 @@ namespace DI_Service_LifeTime.Controllers
         {
             StringBuilder messages = new StringBuilder();
             messages.Append($"Transient1 : {_transient1.GetGuid()}\n");
-            messages.Append($"Transient2 : {_transient2.GetGuid()}\n\n\n");
+            messages.Append($"Transient2 : {_transient2.GetGuid()}\n");
+            messages.Append($"Transient3 : {_transient3.GetGuid()}\n\n\n");
             messages.Append($"Scoped1 : {_scoped1.GetGuid()}\n");
-            messages.Append($"Scoped2 : {_scoped2.GetGuid()}\n\n\n"); 
+            messages.Append($"Scoped2 : {_scoped2.GetGuid()}\n"); 
+            messages.Append($"Scoped3 : {_scoped3.GetGuid()}\n\n\n"); 
             messages.Append($"Singleton1 : {_singleton1.GetGuid()}\n");
-            messages.Append($"Singleton2 : {_singleton2.GetGuid()}\n\n\n");
+            messages.Append($"Singleton2 : {_singleton2.GetGuid()}\n\n");
 
             return Ok( messages.ToString() );
         }
